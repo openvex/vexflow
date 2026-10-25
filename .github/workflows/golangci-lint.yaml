@@ -12,23 +12,7 @@ on:
 permissions: {}
 
 jobs:
-  resolve-versions:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-    outputs:
-      stable: ${{ steps.versions.outputs.GO_MINOR_VERSION_STABLE }}
-    steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-        with:
-          persist-credentials: false
-
-      - name: Determine Go versions
-        id: versions
-        uses: carabiner-dev/actions/go/versions@d41fe10fe88deaf493ce026007da73738b9f570c # main
-
   golangci:
-    needs: resolve-versions
     name: lint
     runs-on: ubuntu-latest
     permissions:
@@ -40,7 +24,7 @@ jobs:
 
       - uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e # v7.0.0
         with:
-          go-version: ${{ needs.resolve-versions.outputs.stable }}
+          go-version: '1.27'
           check-latest: true
           cache: true
 
