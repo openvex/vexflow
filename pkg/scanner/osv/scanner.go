@@ -70,7 +70,7 @@ func (s *Scanner) ingestScanResults(results *models.VulnerabilityResults) ([]*ap
 				}
 
 				if id == "" {
-					id = result.Packages[i].Vulnerabilities[i].GetId()
+					id = result.Packages[i].Vulnerabilities[j].GetId()
 				} else {
 					aliases = append(aliases, result.Packages[i].Vulnerabilities[j].GetId())
 				}
